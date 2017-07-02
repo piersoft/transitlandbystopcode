@@ -8,7 +8,7 @@ Prerequisiti: il Feed GTFS del proprio gestore di trasporti pubblici deve essere
 
 
 1) Inserire nella dir GTFS il file stops.txt del proprio gestore di trasporti pubblici
-2) lanciare index.php?id=numerostopcode ad esempio index.php?id=320
+2) lanciare index.php?stop_code=numerostopcode ad esempio index.php?stop_code=320
 
 A titolo di esempio sono usati i dati di Palermo.
 
