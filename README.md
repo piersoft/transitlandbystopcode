@@ -13,3 +13,6 @@ Prerequisiti: il Feed GTFS del proprio gestore di trasporti pubblici deve essere
 A titolo di esempio sono usati i dati di Palermo.
 
 ps: alla data attuale AMAT ha i GTFS che scadono il 30.06.2017 per cui TransitLand non fornisce risposta utile.
+
+
+Licenza MIT @piersoft
