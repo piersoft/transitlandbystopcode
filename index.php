@@ -4,7 +4,7 @@ $stop_code=$_GET["stop_code"];
 $lon="";
 $lat="";
 
-      $url="gtfspalermo/stops.txt";
+      $url="gtfs/stops.txt";
       $inizio=0;
       $homepage ="";
      //  echo $url;
