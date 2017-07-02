@@ -1,5 +1,5 @@
 <?php
-
+// Licenza MIT @piersoft
 $stop_code=$_GET["stop_code"];
 $lon="";
 $lat="";
@@ -20,11 +20,14 @@ $lat="";
 
     //  echo $count;
       for ($i=$inizio;$i<$count;$i++){
+        //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo stopd_code. Per Palermo è 2.
         $filter= $csv[$i][2];
 
         if ($filter==$stop_code){
-          $lon=$csv[$i][3];
-          $lat=$csv[$i][0];
+          $lon=$csv[$i][3]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo longitudine. Per Palermo è 3.
+
+          $lat=$csv[$i][0]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo latitudine. Per Palermo è 0.
+
 }
     }
 
