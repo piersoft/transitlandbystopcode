@@ -1,5 +1,5 @@
 <?php
-// Licenza MIT @piersoft
+
 $stop_code=$_GET["stop_code"];
 $lon="";
 $lat="";
@@ -20,14 +20,11 @@ $lat="";
 
     //  echo $count;
       for ($i=$inizio;$i<$count;$i++){
-        //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo stopd_code. Per Palermo è 2.
         $filter= $csv[$i][2];
 
         if ($filter==$stop_code){
-          $lon=$csv[$i][3]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo longitudine. Per Palermo è 3.
-
-          $lat=$csv[$i][0]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo latitudine. Per Palermo è 0.
-
+          $lon=$csv[$i][3];
+          $lat=$csv[$i][0];
 }
     }
 
@@ -40,14 +37,16 @@ $text=$parsed_json2->{'stops'}[0]->{'onestop_id'};
 
 
 $numero_giorno_settimana = date("w");
+
+if ($numero_giorno_settimana == 2) $numero_giorno_settimana =1;
+if ($numero_giorno_settimana == 3) $numero_giorno_settimana =2;
+if ($numero_giorno_settimana == 4) $numero_giorno_settimana =3;
+if ($numero_giorno_settimana == 5) $numero_giorno_settimana =4;
+if ($numero_giorno_settimana == 6) $numero_giorno_settimana =5;
+if ($numero_giorno_settimana == 0) $numero_giorno_settimana =6;
 //echo $numero_giorno_settimana;
 $c=0;
 $t=0;
-include("getting.php");
-//echo $text;
-//$text="s-sr607cdc2c-rivieradichiaia164";
-//$text1="r-s-151";
-$data=new getdata();
 
 date_default_timezone_set("Europe/Rome");
 $ora=date("H:i:s", time());
@@ -74,9 +73,6 @@ foreach($parsed_json->{'routes_serving_stop'} as $data=>$csv1){
 
 $countl=0;
 $countl2=0;
-//$provaurl="https://transit.land/api/v1/schedule_stop_pairs?destination_onestop_id=s-srhvmp4sep-nocco2&origin_departure_between=08:40,09:40&date=2016-10-10";
-//$json_string1 = file_get_contents($provaurl);
-//echo $today;
 $json_string1 = file_get_contents("https://transit.land/api/v1/schedule_stop_pairs?destination_onestop_id=".$text."&origin_departure_between=".$ora.",".$ora2."&date=".$today);
 
 //echo $json_string1;
@@ -97,13 +93,9 @@ if ($countl == 0){
 $temp_c1="";
 for ($l=0;$l<$countl;$l++)
   {
-    //echo $parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_except_dates'}[0]."</br>";
-    //echo $parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_days_of_week'}[$numero_giorno_settimana]."</br>";
-    //echo $parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_added_dates'}."</br>";
 
-  //      if ( ($parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_except_dates'} != $today))  {
 
-  	if (($parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_days_of_week'}[$numero_giorno_settimana-1]) == "1")
+  	if (($parsed_json1->{'schedule_stop_pairs'}[$l]->{'service_days_of_week'}[$numero_giorno_settimana]) == "true")
   	  {
 
         $distanza[$l]['orari']=$parsed_json1->{'schedule_stop_pairs'}[$l]->{'destination_arrival_time'};
@@ -127,31 +119,9 @@ for ($l=0;$l<$countl;$l++)
         $c++;
       }
 
-  //  }
 
   }
-  sort($distanza);
-/*
-    for ($i=0;$i<$count;$i++){
-  $json_string2 = file_get_contents("https://transit.land/api/v1/onestop_id/".$parsed_json1->{'schedule_stop_pairs'}[$i]->{'origin_onestop_id'});
-  $parsed_json2 = json_decode($json_string2);
 
-  $name=$parsed_json2->{'name'};
-
-for ($l=0;$l<$c;$l++)
-  {
-
-  if ( ($parsed_json1->{'schedule_stop_pairs'}[$l]->{'route_onestop_id'}) == $parsed_json->{'routes_serving_stop'}[$i]->{'route_onestop_id'}){
-      $temp_c1 .="Linea: <b>".$parsed_json->{'routes_serving_stop'}[$i]->{'route_name'}."</b> arrivo: <b>";
-    //  $temp_c1 .=$parsed_json1->{'schedule_stop_pairs'}[$l]->{'destination_arrival_time'};
-      $temp_c1 .=$distanza[$l]['orari']."</b>\n<br>proveniente da: ".$name;
-      $temp_c1 .="</br>";
-
-      }
-
-}
-}
-*/
 if ( $start==1){
 echo "<font face='verdana'>Linee in arrivo nella prossima ora a <b>".$namedest."</b>\n<br>";
 }else{
