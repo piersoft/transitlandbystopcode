@@ -125,13 +125,13 @@ for ($l=0;$l<$countl;$l++)
 
   }
 
-if ( $start==1){
+if ( $start==1 && $lon!='' && $lat!=''){
 echo "<font face='verdana'>Linee in arrivo nella prossima ora a <b>".$namedest."</b>\n<br>";
 }else{
   echo "<font face='verdana'>Non ci sono arrivi nella prossima ora";
 
 }
-
+if($lon!='' && $lat!='')
 echo "\n<br><font face='verdana'>".$temp_c1;
 
 
