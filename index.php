@@ -76,7 +76,7 @@ foreach($parsed_json->{'routes_serving_stop'} as $data=>$csv1){
 
 $countl=0;
 $countl2=0;
-$json_string1 = file_get_contents("https://transit.land/api/v1/schedule_stop_pairs?destination_onestop_id=".$text."&origin_departure_between=".$ora.",".$ora2."&date=".$today);
+$json_string1 = file_get_contents("https://transit.land/api/v1/schedule_stop_pairs?destination_onestop_id=".urlencode($text)."&origin_departure_between=".$ora.",".$ora2."&date=".$today);
 
 //echo $json_string1;
 $parsed_json1 = json_decode($json_string1);
