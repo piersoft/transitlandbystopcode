@@ -18,13 +18,16 @@ $lat="";
       }
 
 
-    //  echo $count;
+//  echo $count;
       for ($i=$inizio;$i<$count;$i++){
+        //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo stopd_code. Per Lecce è 1.
         $filter= $csv[$i][2];
 
         if ($filter==$stop_code){
-          $lon=$csv[$i][3];
-          $lat=$csv[$i][0];
+          $lon=$csv[$i][3]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo longitudine. Per Lecce è 5.
+
+          $lat=$csv[$i][0]; //attenzione il numero dopo [$i] indica la posizione nel file stops.txt del campo latitudine. Per Palermo è 4.
+
 }
     }
 
